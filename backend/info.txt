@@ -1,0 +1,10 @@
+Dependencias
+-expres
+-mysql
+-cors
+-dotenv
+-nodemon
+-socket.io
+-bcryptjs
+-connect-multiparty
+-jsonwebtoken
