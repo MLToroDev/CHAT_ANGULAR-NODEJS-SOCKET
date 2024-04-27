@@ -45,8 +45,9 @@ export class RegisterComponent extends BaseComponent {
       formData.append('password', password)
       formData.append('active', '1')
       formData.append('roleId', '2')
-      if (this.userImg) formData.append('Img', this.userImg);
-
+      console.log(this.userImg)
+      if (this.userImg) formData.append('img', this.userImg);
+console.log(this.userImg)
       this.createService({ url: `${UriConstants.USER}/create`, data: formData }).subscribe({
         next: () => { this.router.navigate(['/login']) },
         error: error => {

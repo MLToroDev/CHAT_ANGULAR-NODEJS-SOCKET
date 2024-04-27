@@ -12,10 +12,12 @@ module.exports = {
         })
     },
     store: (req, res) => {
+        console.log(req.body)
         req.body.img = ''
         if (req.files.img) {
             req.body.img = getFilePath(req.files.img)
         }
+        console.log(req.body.img)
         User.create(req.con, req.body, (error, row) => {
             if (error) {
                 if(req.body.img)unlinkFile(req.body.img)

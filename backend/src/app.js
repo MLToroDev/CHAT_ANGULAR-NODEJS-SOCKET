@@ -20,6 +20,7 @@ const io = require('socket.io')(httpServer, {
     }
 
 })
+
 app.use(cors())
 const userRoutes = require('./router/userRoute')
 const messageRoutes = require('./router/messageRoute')
@@ -38,6 +39,7 @@ const basePath = `/${API_NAME}/${API_VERSION}`
 
 app.use(basePath,userRoutes)
 app.use(basePath,messageRoutes)
+
 io.on('connect',(socket)=>{
     socket.on('disconnect',()=>{
         console.log('an user has disconnected');
