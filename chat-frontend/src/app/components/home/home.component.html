@@ -7,7 +7,7 @@
         {{userData.firstName}} {{userData.lastName}}
       </div>
     </div>
-    <div *ngIf="messages.length !== 0" class="messages" id="chat">
+    <div *ngIf="messages.length !== 0" class="messages" #chat id="chat">
       <div *ngFor="let message of messages" class="message {{userData.id === message.userid  ? 'me' : 'others'}}">
         <span class="user-name">{{message.firstName}}</span> {{message.content}}
         <em *ngIf="userData.id === message.userid" class="more-info" (click)="op.toggle($event)">...</em>
@@ -29,11 +29,10 @@
 
       <input placeholder="Escribe un mensaje" type="text" [(ngModel)]="inputValue" (keyup.enter)="saveMessage()"
         (keydown)="startTyping()" (blur)="stopTyping()" />
+        
 
-      <p-fileUpload chooseLabel=' ' chooseIcon="pi pi-paperclip" [multiple]="false" [fileLimit]="1" accept="image/*"
-        [maxFileSize]="1000000" [showCancelButton]="false" [showUploadButton]="false">
-      </p-fileUpload>
-      
+
+        <i class="pi pi-angle-down" style="font-size: 2rem" title="Bajar conversación" (click)="subirChat()" ></i>
     </div>
   </div>
 </div>

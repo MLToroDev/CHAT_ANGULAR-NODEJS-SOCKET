@@ -121,7 +121,7 @@ $messages-background: #F7F7F7;
 		display: flex;
 		align-items: center;
 		padding: 0 0.5rem 0 1.5rem;
-
+		
 		i {
 			font-size: 1.5rem;
 			margin-right: 1rem;
@@ -137,14 +137,14 @@ $messages-background: #F7F7F7;
 		input {
 			border:none;
 			background-image:none;
-			background-color: white;
+			background-color: rgb(255, 255, 255);
 			padding: 0.5rem 1rem;
 			margin-right: 1rem;
 			border-radius: 1.125rem;
 			flex-grow: 2;
 			box-shadow:
-				0 0 1rem rgba(black, 0.1),
-				0rem 1rem 1rem -1rem rgba(black, 0.2);
+				0 0 1rem rgba(rgb(0, 0, 0), 0.1),
+				0rem 1rem 1rem -1rem rgba(rgb(0, 0, 0), 0.2);
 
 			font-family: Red hat Display, sans-serif;
 			font-weight: 400;

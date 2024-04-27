@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AuthModel } from '@mean/models';
 import { ApiService, AuthService, ChatService, Message } from '@mean/services';
 import { BaseComponent } from '@mean/shared';
@@ -10,6 +10,9 @@ import { UriConstants, sessionStorageConstants } from '@mean/utils';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent extends BaseComponent<Message> {
+
+  @ViewChild('chat') chatElement: any;
+
   messageFiletemp: File | null = null;
   fileName = '';
   showTyping = false;
@@ -17,6 +20,7 @@ export class HomeComponent extends BaseComponent<Message> {
   userData: AuthModel.User
   inputValue = '';
   conter = 0;
+
   constructor(
     protected readonly api: ApiService<Message>,
     private readonly chatServices: ChatService,
@@ -40,26 +44,35 @@ export class HomeComponent extends BaseComponent<Message> {
       }
 
     })
+
+  }
+
+  subirChat(): void {
+
+    if (this.chatElement) {
+      this.chatElement.nativeElement.scrollTop = this.chatElement.nativeElement.scrollHeight;
+    }
   }
   private async getMessages() {
 
     this.messages = (await this.searchArrAsync({ url: UriConstants.MESSAGES })).response;
 
-
+    console.log(this.messages)
   }
+
   saveMessage() {
 
     if (this.inputValue) {
       const payload = { userid: this.userData.id, content: this.inputValue, messageType: 'text' }
       this.create({ url: `${UriConstants.MESSAGES}/create`, data: payload })
+      console.log(payload)
       this.inputValue = ""
     }
+
   }
-  
+
   handleMessage(id: number) {
-
     this.delete({ url: `${UriConstants.MESSAGES}/${id}` })
-
 
   }
   startTyping() {
@@ -71,12 +84,11 @@ export class HomeComponent extends BaseComponent<Message> {
     this.conter = 0;
     this.chatServices.sendTyping(false)
   }
+
   adjuntarDocumento(fileInput: any) {
-
-
     this.fileName = fileInput.target.files[0].name;
     console.log(fileInput.target.files[0])
     this.messageFiletemp = fileInput.target.files[0]
   }
- 
+
 }
