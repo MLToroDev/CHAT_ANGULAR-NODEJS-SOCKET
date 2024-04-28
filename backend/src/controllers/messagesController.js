@@ -35,6 +35,7 @@ function _getMessages(req, res) {
             res.status(500).send({ response: "Ha ocurrido un error listando los mensajes" })
         } else {
             const { io } = req;
+            console.log(rows)
             io.emit('message', rows)
             res.status(200).send({ response: rows })
         }
