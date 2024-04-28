@@ -8,23 +8,26 @@
       </div>
     </div>
     <div *ngIf="messages.length !== 0" class="messages" #chat id="chat">
-      <div *ngFor="let message of messages" class="message {{userData.id === message.userid  ? 'me' : 'others'}}">
-        <span class="user-name">{{message.firstName}}</span> {{message.content}}
-        <em *ngIf="userData.id === message.userid" class="more-info" (click)="op.toggle($event)">...</em>
-        <div class="card-end">
-          <p-overlayPanel #op>
-            <ng-template pTemplate="content">
-              <em class="pi pi-trash" style="cursor: pointer;" (click)="handleMessage(message.id)"></em>
-            </ng-template>
-          </p-overlayPanel>
-        </div>
-      </div>
-      <div class="message stark" *ngIf="showTyping">
-        <div class="typing typing-1"></div>
-        <div class="typing typing-2"></div>
-        <div class="typing typing-3"></div>
-      </div>
+      <ul >
+        <li *ngFor="let message of messages" class="message {{userData.id === message.userid  ? 'me' : 'others'}}">
+          <span class="user-name">{{message.firstName}}</span> {{message.content}}
+          <em *ngIf="userData.id === message.userid" class="more-info" (click)="op.toggle($event)">...</em>
+          <div class="card-end">
+            <p-overlayPanel #op>
+              <ng-template pTemplate="content">
+                <em class="pi pi-trash" style="cursor: pointer;" (click)="handleMessage(message.id)"></em>
+              </ng-template>
+            </p-overlayPanel>
+          </div>
+        </li>
+        <li class="message stark" *ngIf="showTyping">
+          <div class="typing typing-1"></div>
+          <div class="typing typing-2"></div>
+          <div class="typing typing-3"></div>
+        </li>
+      </ul>
     </div>
+    
     <div class="input">
 
       <input placeholder="Escribe un mensaje" type="text" [(ngModel)]="inputValue" (keyup.enter)="saveMessage()"
